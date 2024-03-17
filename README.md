@@ -22,7 +22,7 @@ Again the attacker flushes the cache, then it jump to the address containing vic
 
 ![fault-reload.png](img/fault-reload.png)
 
-## Performance Counters
+## [Performance Counters](https://docs.openhwgroup.org/projects/cv32e40x-user-manual/en/latest/perf_counters.html)
 
 They give a benchmarking capability. They can count report events like cache missed, instruction executed, CPU frequency etc...
 By default performance counters are available also to the attackers on the system. The mitigation for this type of attacks is making the interface root only.
