@@ -63,3 +63,7 @@ Let's try it in the SiFive present on the cluster
 
 <img src='img/sifive-arch.png' width='500'>
 
+I will run [this](https://github.com/cispa/Security-RISC/tree/main/spectre) spectre POC for RISC-V from Lukas Gerlach, Michael Schwarz and Daniel Weber.
+
+<img src='img/strace-sifive.png' width='500'>
+
