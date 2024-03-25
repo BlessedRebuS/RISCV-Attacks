@@ -59,7 +59,7 @@ On the Monte Cimone's RISC-V cluster it is present the [SiFive U74-MC](https://s
 
 "_Meltdown attacks (CVE-2017-5754) rely upon speculative access to memory that the processor does not have permission to access; our processors do not perform this form of speculation. The Spectre attacks (CVE-2017-5753 and CVE-2017-5715) rely upon speculative memory accesses causing cache state transitions; our processors do not speculatively refill or evict data cache lines._"
 
-Let's try it in the cluster 
+Let's try it in the SiFive present on the cluster 
 
 <img src='img/sifive-arch.png' width='500'>
 
