@@ -4,6 +4,9 @@
 **Exploit implementation bugs**
 **Abusing physical properties** like rowhammer or power analysis
 
+# Side channel attacks
+In computer security, a side-channel attack is any attack based on extra information that can be gathered because of the fundamental way a computer protocol or algorithm is implemented, rather than flaws in the design of the protocol or algorithm itself.
+
 ## Cache Flush and Reload (mitigated)
 
 <img src='img/flush-reload.png' width='500'>
