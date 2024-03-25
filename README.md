@@ -6,12 +6,11 @@
 
 ## Cache Flush and Reload (mitigated)
 
-![flush-reload.png](img/flush-reload.png)
+<img src='img/flush-reload.png' width='500'>
 
 Usually after a cache miss the data is fetched from the DRAM, but the second time is fetched from the CPU cache that is much faster.
 
-![shared-memory.png](img/shared-memory.png)
-
+<img src='img/shared-memory.png' width='500'>
 
 After the attacker flushes the cache, the victim now loads (due to a read operation) a data on the empty cache. 
 Now the attacker can read data and due to its access time knows if the data is loaded in cache or not.
@@ -20,14 +19,14 @@ Now the attacker can read data and due to its access time knows if the data is l
 
 Again the attacker flushes the cache, then it jump to the address containing victim cache line and handles the error. From the timing of the fault the attacker can predict if the data was on cache or not.
 
-![fault-reload.png](img/fault-reload.png)
+<img src='img/fault-reload.png' width='500'>
 
 ## [Performance Counters](https://docs.openhwgroup.org/projects/cv32e40x-user-manual/en/latest/perf_counters.html)
 
 They give a benchmarking capability. They can count report events like cache missed, instruction executed, CPU frequency etc...
 By default performance counters are available also to the attackers on the system. The mitigation for this type of attacks is making the interface root only.
 
-![branch-taken.png](img/branch-taken.png)
+<img src='img/branch-taken.png' width='500'>
 
 *Some performance counters still remain privileges by standard.* The events are privileged apart from a few. The "branch taken" event is now privileged, but remains the number of **CPU cycles elapsed** and the **number of instruction retired**.
 
@@ -45,6 +44,7 @@ At this part it comes the **Optimize by Prediction**. The CPU has a history of l
 Instead of only predicting the branch, the CPU could actually execute the prediction. That makes modern CPUs very fast. [Spectre](https://meltdownattack.com/) used this optimization to exploit the CPU. *RISC-V doesn't have speculative execution yet*, but they have **speculative prefetching**.
 This means that the attacker can let the CPU prefetch whatever he wants.
 
-![prefetch.png](img/prefetch.png)
+<img src='img/prefetch.png' width='500'>
+
 
 This means that **the Speculative Prefetching is exploitable** and Spectre can be exploited on some RISC-V processors. On some specific CPUs it is present the limited speculation that mitigates this attacks.
