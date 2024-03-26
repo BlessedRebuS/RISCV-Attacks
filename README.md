@@ -52,7 +52,7 @@ This means that the attacker can let the CPU prefetch whatever he wants.
 
 This means that **the Speculative Prefetching is exploitable** and Spectre can be exploited on some RISC-V processors. On some specific CPUs it is present the limited speculation that mitigates this attacks.
 
-# Case of Study: Monte Cimone's RISC-V 
+# Case of Study: Monte Cimone's RISC-V SiFive u74-mc
 
 
 On the Monte Cimone's RISC-V cluster it is present the [SiFive U74-MC](https://starfivetech.com/uploads/u74mc_core_complex_manual_21G1.pdf). As the manual says and [as reported from the SiFive statement](https://www.sifive.com/blog/sifive-statement-on-meltdown-and-spectre), the IP core is not allowed to perform speculative execution:
@@ -67,3 +67,4 @@ I will run [this](https://github.com/cispa/Security-RISC/tree/main/spectre) spec
 
 <img src='img/strace-sifive.png' width='500'>
 
+As expected this type of attack is mitigated in this processor due to the missing Speculative Execution
