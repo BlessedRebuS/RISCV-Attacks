@@ -68,3 +68,6 @@ I will run [this](https://github.com/cispa/Security-RISC/tree/main/spectre) spec
 <img src='img/strace-sifive.png' width='500'>
 
 As expected this type of attack is mitigated in this processor due to the **limited speculation**. In general, more optimized cores are more vulnerable. This attack actually works on C910 that allows speculative execution.
+
+### Challenges
+ROP: a function that calls other functions should not assume these registers hold their value across method calls.
