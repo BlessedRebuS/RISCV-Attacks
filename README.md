@@ -1,4 +1,4 @@
-[Black Hat conference ](https://www.youtube.com/watch?v=HCZ6DCu2ciE) and [RISC-V Attacks POC](https://github.com/cispa/Security-RISC/tree/mlast weekain/flush-fault)
+[Black Hat conference ](https://www.youtube.com/watch?v=HCZ6DCu2ciE) and [RISC-V Attacks POC](https://github.com/cispa/Security-RISC/)
 
 **Attack timing differences** in caches and predictors
 **Exploit implementation bugs**
