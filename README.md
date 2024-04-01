@@ -69,6 +69,13 @@ I will run [this](https://github.com/cispa/Security-RISC/tree/main/spectre) spec
 
 As expected this type of attack is mitigated in this processor due to the **limited speculation**. In general, more optimized cores are more vulnerable. This attack actually works on C910 that allows speculative execution.
 
+# ISA Analysis
+## Function Calls: Callee and Caller
+In programming, the function that calls another function is the `caller` and the called function is the `callee` or `leaf function`. The main itself is a caller function, because It initialzies and call all the following function calls, but is also a callee because It is called at the start of the program by the **start** function.
+
+<img src='img/caller-callee' width='500'>
+
+
 ### Challenges
 ROP: a function that calls other functions should not assume these registers hold their value across method calls.
 Caller and callee: https://danielmangum.com/posts/risc-v-bytes-caller-callee-registers/
