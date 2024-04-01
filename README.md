@@ -72,6 +72,9 @@ As expected this type of attack is mitigated in this processor due to the **limi
 # ISA Analysis
 ## Function Calls: Callee and Caller
 In programming, the function that calls another function is the `caller` and the called function is the `callee` or `leaf function`. The main itself is a caller function, because It initialzies and call all the following function calls, but is also a callee because It is called at the start of the program by the **start** function. As the image below shows, in the [RISC-V calling convention](https://riscv.org/wp-content/uploads/2015/01/riscv-calling.pdf) there are 12 integer registers (S0-S11) and 12 floating point registers (FS0-FS11) that are preserved across function calls and must be saved by the callee if they are used.
+Generally a callee performs a task or computations and returns the result to the caller, _eg: function that performs a sum_.
+A function, such as the `main()` function, can be both caller and callee.
+In conclusion, callers can use the "S" registers to get the result saved by the callee and callees can use the "T" (temporary) registers to temporary save the data. This is generally true until the program runs out of registers and in this case both the S and T registers can be used, but at the end they have to be backed up.
 
 <img src='img/caller-callee.png' width='500'>
 
