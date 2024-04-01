@@ -87,6 +87,8 @@ As It is well explained [here](https://arxiv.org/pdf/2007.14995.pdf), the open s
 * Ends in a **ret** (equivalent to **jr ra**)
 * Find some extra instruction to perform operations in the ROP
 
+After that, as suggested in [this](https://pure.royalholloway.ac.uk/ws/portalfiles/portal/37157938/ROP_RISCV.pdf) paper, It could be used a nested function call to emit these save and restore sequences for the registers.
+
 ### Challenges
 > ROP: a function that calls other functions should not assume these registers hold their value across method calls.
 
