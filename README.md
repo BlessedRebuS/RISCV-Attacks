@@ -89,6 +89,80 @@ As It is well explained [here](https://arxiv.org/pdf/2007.14995.pdf), the open s
 
 After that, as suggested in [this](https://pure.royalholloway.ac.uk/ws/portalfiles/portal/37157938/ROP_RISCV.pdf) paper, It could be used a nested function call to emit these save and restore sequences for the registers. As they say, the presence of a **restore sequence** is crucial for mounting a ROP attack, as we need to tamper with the return address register **ra**, which is callee-saved.
 
+### Non-Leaf functions
+Consider the following C function
+
+```c
+int test_empty() {
+    int test = 1;
+    printf("test");
+    return 1;
+}
+```
+
+That can be disassembled with
+
+```bash
+disasm test_empty()
+```
+
+Here there is the disassembled code, using GDB
+
+```gdb
+Dump of assembler code for function test_empty:
+   0x0000000000000802 <+0>:	addi	sp,sp,-32
+   0x0000000000000804 <+2>:	sd	s0,24(sp)
+   0x0000000000000806 <+4>:	addi	s0,sp,32
+   0x0000000000000808 <+6>:	li	a5,1
+   0x000000000000080a <+8>:	sw	a5,-20(s0)
+   0x000000000000080e <+12>:	li	a5,1
+   0x0000000000000810 <+14>:	mv	a0,a5
+   0x0000000000000812 <+16>:	ld	s0,24(sp)
+   0x0000000000000814 <+18>:	addi	sp,sp,32
+   0x0000000000000816 <+20>:	ret
+```
+
+This asm code can't jump to another function and is a "dead end" for the ROP chain. To bypass this wall we must use non-leaf functions. Let's try to add a simple nested function call inside the test_empty().
+
+```c
+int test_empty2() {
+    int test = 1;
+    return 1;
+
+}
+int test_empty() {
+    test_empty2();
+    return 1;
+}
+```
+
+The disassembled of the test_empty now is the following
+
+```gdb
+Dump of assembler code for function test_empty:
+   0x0000000000000818 <+0>:	addi	sp,sp,-16
+   0x000000000000081a <+2>:	sd	ra,8(sp)
+   0x000000000000081c <+4>:	sd	s0,0(sp)
+   0x000000000000081e <+6>:	addi	s0,sp,16
+   0x0000000000000820 <+8>:	jal	ra,0x802 <test_empty2>
+   0x0000000000000824 <+12>:	li	a5,1
+   0x0000000000000826 <+14>:	mv	a0,a5
+   0x0000000000000828 <+16>:	ld	ra,8(sp)
+   0x000000000000082a <+18>:	ld	s0,0(sp)
+   0x000000000000082c <+20>:	addi	sp,sp,16
+   0x000000000000082e <+22>:	ret
+```
+
+Here we se that the ra register is modified with
+
+`0x000000000000081a <+2>:	sd	ra,8(sp)`
+
+and the value is loaded with
+
+`0x0000000000000828 <+16>:	ld	ra,8(sp)`
+
+From this example It is clear that to build gadget a non-leaf function should be used or a leaf function should be modified to embed a **dummy** function call.
+
 ### Challenges
 > ROP: a function that calls other functions should not assume these registers hold their value across method calls.
 
