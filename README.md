@@ -73,7 +73,7 @@ As expected this type of attack is mitigated in this processor due to the **limi
 ## Function Calls: Callee and Caller
 In programming, the function that calls another function is the `caller` and the called function is the `callee` or `leaf function`. The main itself is a caller function, because It initialzies and call all the following function calls, but is also a callee because It is called at the start of the program by the **start** function.
 
-<img src='img/caller-callee' width='500'>
+<img src='img/caller-callee.png' width='500'>
 
 
 ### Challenges
