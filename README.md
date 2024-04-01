@@ -71,7 +71,7 @@ As expected this type of attack is mitigated in this processor due to the **limi
 
 # ISA Analysis
 ## Function Calls: Callee and Caller
-In programming, the function that calls another function is the `caller` and the called function is the `callee` or `leaf function`. The main itself is a caller function, because It initialzies and call all the following function calls, but is also a callee because It is called at the start of the program by the **start** function.
+In programming, the function that calls another function is the `caller` and the called function is the `callee` or `leaf function`. The main itself is a caller function, because It initialzies and call all the following function calls, but is also a callee because It is called at the start of the program by the **start** function. As the image below shows, in the RISC-V calling convention there are 12 integer registers (S0-S11) and 12 floating point registers (FS0-FS11) that are preserved across function calls and must be saved by the callee if they are used.
 
 <img src='img/caller-callee.png' width='500'>
 
