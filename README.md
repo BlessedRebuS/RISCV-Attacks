@@ -78,6 +78,8 @@ In conclusion, callers can use the "S" registers to get the result saved by the 
 
 <img src='img/caller-callee.png' width='500'>
 
+## ROP Contraints
+As It is well explained [here](https://arxiv.org/pdf/2007.14995.pdf), the open source nature of the ISA, brought some security updates to mitigate some ROP attacks.
 
 ### Challenges
 > ROP: a function that calls other functions should not assume these registers hold their value across method calls.
