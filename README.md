@@ -79,7 +79,13 @@ In conclusion, callers can use the "S" registers to get the result saved by the 
 <img src='img/caller-callee.png' width='500'>
 
 ## ROP Contraints
-As It is well explained [here](https://arxiv.org/pdf/2007.14995.pdf), the open source nature of the ISA, brought some security updates to mitigate some ROP attacks.
+As It is well explained [here](https://arxiv.org/pdf/2007.14995.pdf), the open source nature of the ISA, brought some security updates to mitigate some ROP attacks. ROPs are built using gadget found across the asm code, that in RISC-V translates in using the epilogue of a function and knowing that the used registers has to be restored. One more complication is the usage of the link register. The purpose of this register is to optimize calls to leaf subroutines since the return address need not be pushed or popped on the stack as It happens in X86_64. As It is specified in the paper, to have a full functional and chainable ROP gadget the following contraints have to be satisfied:
+
+* ROP exploitation is mostly limited to **non-leaf function epilogues**
+* Loads a value from a(**sp**) into **ra** where a is some positive immediate value divisible by 8
+* Adds an immediate value b to **sp** where b > a and b is divisible by 16 (due to stack-alignment requirements)
+* Ends in a **ret** (equivalent to **jr ra**)
+* Find some extra instruction to perform operations in the ROP
 
 ### Challenges
 > ROP: a function that calls other functions should not assume these registers hold their value across method calls.
