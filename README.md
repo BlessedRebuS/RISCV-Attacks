@@ -163,7 +163,7 @@ and the value is loaded with
 
 From this example It is clear that to build gadget a non-leaf function should be used or a leaf function should be modified to embed a **dummy** function call.
 
-`Another consideration is that without the ra register, neither the initial buffer overflow can be done because no ra register is used and no return address can be overwritten.`
+`Another consideration is that without the ra register, hence in a leaf function, neither the initial buffer overflow can be done because no ra register is used and no return address can be overwritten.`
 
 ### Challenges
 > ROP: a function that calls other functions should not assume these registers hold their value across method calls.
