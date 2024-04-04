@@ -53,7 +53,7 @@ This also means that **the Speculative Prefetching is exploitable** and Spectre 
 
 The speculative execution is often removed from RISC-V processors (for example is missing in the [SiFive](https://www.sifive.com/)) but is present in recent microarchitectures as the [C910/C920](https://github.com/sophgo/sophgo-doc/blob/main/SG2042/T-Head/XuanTie-C910-C920-UserManual.pdf). In the CPU itself, this type of speculation is given by the precondition of the microarchitecture to do [indirect branches](https://en.wikipedia.org/wiki/Indirect_branch), that is the possibility to jump to a register instead of a address jump.
 
-# Case of Study: Monte Cimone's RISC-V SiFive u74-mc
+## Case of Study: Monte Cimone's RISC-V SiFive u74-mc
 
 On the Monte Cimone's RISC-V cluster it is present the [SiFive U74-MC](https://starfivetech.com/uploads/u74mc_core_complex_manual_21G1.pdf). As the manual says and [as reported from the SiFive statement](https://www.sifive.com/blog/sifive-statement-on-meltdown-and-spectre), the IP core is not allowed to perform speculative execution:
 
