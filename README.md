@@ -44,7 +44,7 @@ At this part it comes the **Optimize by Prediction**. The CPU has a history of l
 
 ## CPU OPTIMIZATION: Speculative Execution
 
-Instead of only predicting the branch, the CPU could actually execute the prediction. That makes modern CPUs very fast. [Spectre](https://meltdownattack.com/) used this optimization to exploit the CPU. *RISC-V doesn't have speculative execution yet*, but they have **speculative prefetching**.
+Instead of only predicting the branch, the CPU could actually execute the prediction. That makes modern CPUs very fast. [Spectre](https://spectreattack.com/spectre.pdf) used this optimization to exploit the CPU. *RISC-V doesn't have speculative execution yet*, but they have **speculative prefetching**.
 This means that the attacker can let the CPU prefetch whatever he wants.
 
 <img src='img/prefetch.png' width='500'>
