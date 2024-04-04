@@ -45,12 +45,11 @@ At this part it comes the **Optimize by Prediction**. The CPU has a history of l
 ## CPU OPTIMIZATION: Speculative Execution
 
 Instead of only predicting the branch, the CPU could actually execute the prediction. That makes modern CPUs very fast. [Spectre](https://spectreattack.com/spectre.pdf) used this optimization to exploit the CPU. *RISC-V doesn't have speculative execution yet*, but they have **speculative prefetching**.
-This means that the attacker can let the CPU prefetch whatever he wants.
+This means that the attacker can let the CPU prefetch whatever he wants. In the CPU itself, this type of speculation is given by the possibility of the microarchitecture to do [indirect branches](https://en.wikipedia.org/wiki/Indirect_branch), that is the possibility to jump to a register instead of a address jump.
 
 <img src='img/prefetch.png' width='500'>
 
-
-This means that **the Speculative Prefetching is exploitable** and Spectre can be exploited on some RISC-V processors. On some specific CPUs it is present the limited speculation that mitigates this attacks.
+This also means that **the Speculative Prefetching is exploitable** and Spectre can be exploited on some RISC-V processors. On some specific CPUs it is present the limited speculation that mitigates this attacks.
 
 # Case of Study: Monte Cimone's RISC-V SiFive u74-mc
 
