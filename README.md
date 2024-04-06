@@ -81,6 +81,45 @@ In conclusion, callers can use the "S" registers to get the result saved by the 
 
 <img src='img/caller-callee.png' width='500'>
 
+## 64bit RISC-V Assembly
+All the specifications of the RISC-V Assembly are described in the [official manual](https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf) at Chapter 20.
+
+### Simple Syscall
+The following asm code use the system call `exit` loaded with the value `1`. 
+
+```asm
+.global _start
+
+.section .text
+_start:
+	li a0, 1
+	li a7, 93
+	ecall
+```
+
+We can find the syscall number for the riscv64 and many other architectures [here](https://gpages.juszkiewicz.com.pl/syscalls-table/syscalls.html). In this case the exit syscall has the number 93, so It has to be loaded in the register `a7`, **that holds the system call code** and it is called with the parameter 1, loaded in the register `a0`. The `ecall` instruction tells the system to run the system call mapped in the register a7 with the arguments mapped in the argument registers, in this case only a0.
+
+After that, because this is not run through an emulator or in a VM, It will be compiled with the basic GNU assembler.
+
+```bash
+riscv64-linux-gnu-as simple_syscall.s -o simple_syscall.o
+riscv64-linux-gnu-ld simple_syscall.o -o simple_syscall
+```
+
+This will generate an ELF `simple_syscall` program, runnable with
+
+```bash
+./simple_syscall
+```
+
+We can check the exit status with 
+
+```bash
+echo $?
+```
+
+And It will tell the last exit status of a program, in this case it will be "1"
+
 ## ROP Contraints
 As It is well explained [here](https://arxiv.org/pdf/2007.14995.pdf), the open source nature of the ISA, brought some security updates to mitigate some ROP attacks. ROPs are built using gadget found across the asm code, that in RISC-V translates in using the epilogue of a function and knowing that the used registers has to be restored. One more complication is the usage of the link register. The purpose of this register is to optimize calls to leaf subroutines since the return address need not be pushed or popped on the stack as It happens in X86_64. As It is specified in the paper, to have a full functional and chainable ROP gadget the following contraints have to be satisfied:
 
