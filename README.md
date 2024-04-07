@@ -53,7 +53,7 @@ This also means that **the Speculative Prefetching is exploitable** and Spectre 
 
 The speculative execution is often removed from RISC-V processors (for example is missing in the [SiFive](https://www.sifive.com/)) but is present in recent microarchitectures as the [C910/C920](https://github.com/sophgo/sophgo-doc/blob/main/SG2042/T-Head/XuanTie-C910-C920-UserManual.pdf). In the CPU itself, this type of speculation is given by the precondition of the microarchitecture to do [indirect branches](https://en.wikipedia.org/wiki/Indirect_branch), that is the possibility to jump to a register instead of a address jump.
 
-## Case of Study: Monte Cimone's RISC-V SiFive u74-mc
+## Case Study: Monte Cimone's RISC-V SiFive u74-mc
 
 On the Monte Cimone's RISC-V cluster it is present the [SiFive U74-MC](https://starfivetech.com/uploads/u74mc_core_complex_manual_21G1.pdf). As the manual says and [as reported from the SiFive statement](https://www.sifive.com/blog/sifive-statement-on-meltdown-and-spectre), the IP core is not allowed to perform speculative execution:
 
@@ -68,6 +68,34 @@ I will run [this](https://github.com/cispa/Security-RISC/tree/main/spectre) spec
 <img src='img/strace-sifive.png' width='500'>
 
 As expected this type of attack is mitigated in this processor due to the **limited speculation**. In general, more optimized cores are more vulnerable. This attack actually works on C910 that allows speculative execution.
+
+## Case Study: Discover Hidden files with retired instructions
+
+In many RISC-V Core implementation there is a counter for the number of instructions retired during the program execution. As the [SiFive U74 manual](https://www.scs.stanford.edu/~zyedidia/docs/sifive/sifive-u74.pdf) says, the `RDINSTRET rd` "Reads the64-bits of the instret CSR, which counts the number of instructions retired by this hart from some arbitrary start point in the past."
+
+In the [PoC](https://github.com/cispa/Security-RISC/blob/main/rlibsc.h) implementation of Cispa's researchers, the `rdinstret` register is printed as follows
+
+```bash
+static inline size_t rdinstret() {
+  size_t val;
+  asm volatile("rdinstret %0" : "=r"(val));
+  return val;
+}
+```
+
+Now we can get the number of instructions retired during the execution of a program. 
+An interesting side-channel attack comes out from this. As the researchers present in the [Access Retired PoC](https://github.com/cispa/Security-RISC/tree/main/access-retired), the value of rdinstret can be used to see what the processor has "prefetched". The PoC tries to open various files, which always fails (return value is NULL). However, the number of retired instructions is higher if the file exists. The core concept of this experiment is presented below.
+
+```c
+size_t before = rdinstret();
+f = fopen(p, "r");
+size_t after = rdinstret();
+size_t delta = after - before;
+```
+
+Here, if the file is present on the filesystem, the number of instructions retired will be higher because **the value of f will not be NULL**. Running the experiment on a folder with no listing permission will give the following result
+
+<img src='img/access-retired.png' width='700'>
 
 # Control Flow Integrity: Buffer Overflow & Return Oriented Programming 
 In this section It will be analyzed memory attacks such as ROP (Return Oriented Programming) with or without a Buffer Overflow entrypoint.
