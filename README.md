@@ -106,6 +106,21 @@ Here, if the file is present on the filesystem, the number of instructions retir
 
 Another example to understand better the number of the retired instruction is [this NOP example](https://github.com/BlessedRebuS/RISCV-Attacks/blob/main/bin/access-retired/example-nop.c). The program has 10x10 `NOP` instructions, executed only if the branch is taken. 
 
+```c
+if (COND){	
+	asm volatile("nop; nop; nop; nop; nop; nop; nop; nop; nop; nop;");
+	asm volatile("nop; nop; nop; nop; nop; nop; nop; nop; nop; nop;");
+	asm volatile("nop; nop; nop; nop; nop; nop; nop; nop; nop; nop;");
+	asm volatile("nop; nop; nop; nop; nop; nop; nop; nop; nop; nop;");
+	asm volatile("nop; nop; nop; nop; nop; nop; nop; nop; nop; nop;");
+	asm volatile("nop; nop; nop; nop; nop; nop; nop; nop; nop; nop;");
+	asm volatile("nop; nop; nop; nop; nop; nop; nop; nop; nop; nop;");
+	asm volatile("nop; nop; nop; nop; nop; nop; nop; nop; nop; nop;");
+	asm volatile("nop; nop; nop; nop; nop; nop; nop; nop; nop; nop;");
+	asm volatile("nop; nop; nop; nop; nop; nop; nop; nop; nop; nop;");
+  }
+```
+
 With COND = 0 (false) this is the output
 
 <img src='img/nop-false.png' width='700'>
