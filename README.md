@@ -71,7 +71,14 @@ As expected this type of attack is mitigated in this processor due to the **limi
 
 ## Case Study: Discover Hidden files with retired instructions
 
-In many RISC-V Core implementation there is a counter for the number of instructions retired during the program execution. As the [SiFive U74 manual](https://www.scs.stanford.edu/~zyedidia/docs/sifive/sifive-u74.pdf) says, the `RDINSTRET rd` "Reads the64-bits of the instret CSR, which counts the number of instructions retired by this hart from some arbitrary start point in the past."
+In many RISC-V Core implementation there is a counter for the number of instructions retired during the program execution. As the [SiFive U74 manual](https://www.scs.stanford.edu/~zyedidia/docs/sifive/sifive-u74.pdf) says, the `RDINSTRET rd` "Reads the64-bits of the instret CSR, which counts the number of instructions retired by this hart from some arbitrary start point in the past." 
+The useful user-space accessible register for the SiFive RISC-V implementation are
+
+```
+RDCYCLE rd Reads the64-bits of the cycle CSR which holds a count of the number of clock cycles executed by the processor core on which the hart is running from an arbitrary start time in the past.
+RDTIME rd Generates an illegal instruction exception. The mtime register is memory mapped to the CLINT register space and can be read using a regular load instruction.
+RDINSTRET rd Reads the64-bits of the instret CSR, which counts the number of instructions retired by this hart from some arbitrary start point in the past.
+```
 
 In the [PoC](https://github.com/cispa/Security-RISC/blob/main/rlibsc.h) implementation of Cispa's researchers, the `rdinstret` register is printed as follows
 
