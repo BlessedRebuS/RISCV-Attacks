@@ -5,6 +5,7 @@
 
 // Incresing the repetitions can reduce the noise making the PoC more precise
 #define REP 100
+#define COND NULL
 
 int main() {
   size_t timings;
@@ -14,7 +15,7 @@ int main() {
   for (int avg = 0; avg < REP; avg++) {
   sched_yield();
   size_t before = rdinstret();
-  if (1){	
+  if (COND){	
 	asm volatile("nop; nop; nop; nop; nop; nop; nop; nop; nop; nop;");
 	asm volatile("nop; nop; nop; nop; nop; nop; nop; nop; nop; nop;");
 	asm volatile("nop; nop; nop; nop; nop; nop; nop; nop; nop; nop;");
