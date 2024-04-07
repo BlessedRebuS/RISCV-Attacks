@@ -104,6 +104,8 @@ Here, if the file is present on the filesystem, the number of instructions retir
 
 <img src='img/access-retired.png' width='700'>
 
+### NOP retired instructions
+
 Another example to understand better the number of the retired instruction is [this NOP example](https://github.com/BlessedRebuS/RISCV-Attacks/blob/main/bin/access-retired/example-nop.c). The program has 10x10 `NOP` instructions, executed only if the branch is taken. 
 
 ```c
