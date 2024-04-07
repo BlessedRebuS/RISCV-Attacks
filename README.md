@@ -97,6 +97,8 @@ Here, if the file is present on the filesystem, the number of instructions retir
 
 <img src='img/access-retired.png' width='700'>
 
+This can lead to bruteforce attacks in the filesystem to access unlistable directories or more complex memory based attacks.
+
 # Control Flow Integrity: Buffer Overflow & Return Oriented Programming 
 In this section It will be analyzed memory attacks such as ROP (Return Oriented Programming) with or without a Buffer Overflow entrypoint.
 
