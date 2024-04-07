@@ -26,8 +26,6 @@ int main() {
 	asm volatile("nop; nop; nop; nop; nop; nop; nop; nop; nop; nop;");
 	asm volatile("nop; nop; nop; nop; nop; nop; nop; nop; nop; nop;");
 	asm volatile("nop; nop; nop; nop; nop; nop; nop; nop; nop; nop;");
-
-  	// f = fopen("test", "r");
   }
   size_t after = rdinstret(); 
   delta = after - before;
