@@ -114,6 +114,10 @@ With COND = 1 (true) this is the output
 
 <img src='img/nop-true.png' width='700'>
 
+Here It is clear how the Out of Order execution, mixed with some speculative mechanism is prefetching the code that has to be run. In this case the NOP is 1 byte long and count as an instruction itself, hence the difference between the two executions (one with the NOP and one without it) differs by 100 instructions, as underlined in the screenshots.
+
+### What to do with this?
+
 This can lead to bruteforce attacks in the filesystem to access unlistable directories or more complex memory based attacks. 
 
 A simple implementation of that, can be [this extension](https://github.com/BlessedRebuS/RISCV-Attacks/blob/main/bin/access-retired/dir-list.c) to bruteforce users' home directories and find who in the system has the file `test`. 
