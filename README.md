@@ -104,7 +104,19 @@ Here, if the file is present on the filesystem, the number of instructions retir
 
 <img src='img/access-retired.png' width='700'>
 
-This can lead to bruteforce attacks in the filesystem to access unlistable directories or more complex memory based attacks.
+Another example to understand better the number of the retired instruction is [this NOP example](https://github.com/BlessedRebuS/RISCV-Attacks/blob/main/bin/access-retired/example-nop.c). The program has 10x10 `NOP` instructions, executed only if the branch is taken. 
+
+With COND = 0 (false) this is the output
+
+<img src='img/nop-false.png' width='700'>
+
+With COND = 1 (true) this is the output
+
+<img src='img/nop-true.png' width='700'>
+
+This can lead to bruteforce attacks in the filesystem to access unlistable directories or more complex memory based attacks. 
+
+A simple implementation of that, can be [this extension](https://github.com/BlessedRebuS/RISCV-Attacks/blob/main/bin/access-retired/dir-list.c) to bruteforce users' home directories and find who in the system has the file `test`. 
 
 # Control Flow Integrity: Buffer Overflow & Return Oriented Programming 
 In this section It will be analyzed memory attacks such as ROP (Return Oriented Programming) with or without a Buffer Overflow entrypoint.
