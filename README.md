@@ -82,7 +82,7 @@ RDINSTRET rd Reads the64-bits of the instret CSR, which counts the number of ins
 
 In the [PoC](https://github.com/cispa/Security-RISC/blob/main/rlibsc.h) implementation of Cispa's researchers, the `rdinstret` register is printed as follows
 
-```bash
+```c
 static inline size_t rdinstret() {
   size_t val;
   asm volatile("rdinstret %0" : "=r"(val));
