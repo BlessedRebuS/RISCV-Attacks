@@ -1,0 +1,8 @@
+./configure \
+    --prefix=/home/pdifazio/nginx/nginx-1.4.0/install \
+    --sbin-path=/home/pdifazio/nginx/nginx-1.4.0/install \
+    --conf-path=/home/pdifazio/nginx/nginx-1.4.0/install/nginx.conf \
+    --pid-path=/home/pdifazio/nginx/nginx-1.4.0/install/nginx.pid \
+    --error-log-path=/home/pdifazio/nginx/nginx-1.4.0/install/error.log \
+    --without-http_rewrite_module 
+
