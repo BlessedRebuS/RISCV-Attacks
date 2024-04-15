@@ -57,5 +57,5 @@ If all is working It should say the following
 
 ### Testing in the SiFive cluster environment
 
-<img src='../img/nginx.png' width='500'>
+<img src='../img/nginx.png' width='1000'>
 
