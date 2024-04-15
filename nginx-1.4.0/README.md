@@ -54,3 +54,8 @@ If all is working It should say the following
 </body>
 </html>
 ```
+
+### Testing in the SiFive cluster environment
+
+<img src='img/nginx.png' width='500'>
+
