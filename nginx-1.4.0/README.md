@@ -27,7 +27,7 @@ make
 
 This will build the program and use the config found in the _install_ folder. If the config is missing it will create it. By default I am choosing the port **1111** in order to run the binary without root permission.
 
-## Compiled binary\
+## Compiled binary
 The **nginx** binary for RISC-V that I compiled is available [here](https://github.com/BlessedRebuS/RISCV-Attacks/blob/main/nginx-1.4.0/objs/nginx). Make sure to follow the project structure to run the binary.
 
 ## Run the binary
