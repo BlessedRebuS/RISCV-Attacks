@@ -70,5 +70,17 @@ Using ROPGadget we can extract gadget from the binary
 This will dump 10MB of gadgets available [here](https://github.com/BlessedRebuS/RISCV-Attacks/blob/main/nginx-1.4.0/gadgets.txt) to be seen.
 
 
+### Searching for specific gadget
 
+From RiscyROP's paper the ROP generator is capable of finding this gadget
+
+```
+; gadget 1
+0xb3058: c.ldsp s4,0x28(sp) ; load s4 (for condition
+0xb305a: c.ldsp ra,0x8(sp) ; in gadget 4)
+0xb305c: c.addi sp,0x10
+0xb305e: c.jr ra
+```
+
+Using a basic grep altough we can't still find this gadget in a "deep 10" search with ROPGadget.
 
