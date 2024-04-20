@@ -59,3 +59,16 @@ If all is working It should say the following
 
 <img src='../img/nginx.png' width='1000'>
 
+## Finding Gadgets
+
+Using ROPGadget we can extract gadget from the binary
+
+```bash
+ ROPgadget --rawMode=64 --rawArc=riscv --rawEndian=little --depth=20 --binary=nginx
+ ```
+
+This will dump 29MB of gadgets available here to be seen
+
+
+
+
