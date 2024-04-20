@@ -67,7 +67,7 @@ Using ROPGadget we can extract gadget from the binary
  ROPgadget --rawMode=64 --rawArc=riscv --rawEndian=little --depth=20 --binary=nginx
  ```
 
-This will dump 29MB of gadgets available here to be seen
+This will dump 10MB of gadgets available [here](https://github.com/BlessedRebuS/RISCV-Attacks/blob/main/nginx-1.4.0/gadgets.txt) to be seen.
 
 
 
