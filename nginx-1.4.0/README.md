@@ -85,3 +85,5 @@ From RiscyROP's paper the ROP generator is capable of finding this gadget
 Using a basic grep altough we can't still find this gadget in a "deep 10" search with ROPGadget.
 
 <img src='../img/grep.png' width='1000'>
+
+This could be because the version of the libc installed in the cluster is **2.35**.
