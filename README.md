@@ -326,7 +326,7 @@ From this example It is clear that to build gadget a non-leaf function should be
 
 `Another consideration is that without the ra register, hence in a leaf function, neither the initial buffer overflow can be done because no ra register is used and no return address can be overwritten.`
 
-## Temporary register manipulation
+## Global register manipulation
 
 Using inline ASM we can overwrite the callee saved registers (s2-s11) with arbitrary value. Those registers are by convention not reset and then GCC at compile time doesn't handle the prologue and epilogue of those registers. For this we can pass the value of those register in all the C program. A simple function that sets the **s2** register is the following.
 
@@ -339,7 +339,7 @@ void not_called(){
 
 We can then print this in another part of the program and across two functions (main and not_called). In this case the value of s2 will be 1 because of the load immediate.
 
-<img src='img/s2-reg.png' width='600'>
+<img src='img/s2-reg.png' width='400'>
 
 ### Challenges
 > ROP: a function that calls other functions should not assume these registers hold their value across method calls.
