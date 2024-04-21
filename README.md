@@ -373,11 +373,11 @@ int main(){
 
 Now with `echo $?` I can print the exit status code. If the exit_function() would be executed entirely It should returns the value `0`, but with the S2 manipulation returns `1`.
 
-<img src='img/manipulate_exit.png' width='600'>
+<img src='img/manipulate_exit.png' width='700'>
 
 Using **ROPGadget** we can actually see the two gadgets we are using to manipulate the _exit_ output. 
 
-<img src='img/ROPGadgets_s2.png' width='700'>
+<img src='img/ROPGadgets_s2.png' width='800'>
 
 ### Challenges
 > ROP: a function that calls other functions should not assume these registers hold their value across method calls.
