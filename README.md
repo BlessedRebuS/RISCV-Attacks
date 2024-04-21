@@ -370,6 +370,10 @@ int main(){
 }
 ```
 
+Now with `echo $?` I can print the exit status code. If the exit_function() would be executed entirely It should returns the value `0`, but with the S2 manipulation returns `1`.
+
+<img src='img/manipulate_exit.png' width='400'>
+
 ### Challenges
 > ROP: a function that calls other functions should not assume these registers hold their value across method calls.
 
