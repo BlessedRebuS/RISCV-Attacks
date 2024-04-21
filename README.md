@@ -375,6 +375,10 @@ Now with `echo $?` I can print the exit status code. If the exit_function() woul
 
 <img src='img/manipulate_exit.png' width='600'>
 
+Using **ROPGadget** we can actually see the two gadgets we are using to manipulate the _exit_ output. 
+
+<img src='img/ROPGadgets_s2.png' width='700'>
+
 ### Challenges
 > ROP: a function that calls other functions should not assume these registers hold their value across method calls.
 
