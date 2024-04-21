@@ -340,7 +340,7 @@ We can then print this in another part of the program and across two functions (
 
 <img src='img/s2-reg.png' width='400'>
 
-## Manipulating exit() syscall status code
+## Manipulating exit() syscall status code with S registers
 Using the previous assumtpions, we can now control the system call arguments using values passed across the functions using callee saved registers.
 In this PoC I will use the **S2** register as the argument passed to the _exit_ system call. The PoC consists in a jump from the cuntion not_called to the exit function but just after the S2 register is set. In this way the S2 register is the register preserved in the not_called function that the attacker can control. 
 The jump lands after in the instruction `asm volatile ("mv a0, s2")` and loads with the value 1 the register S2 that reflects in the value 1 on the exit system call.
@@ -378,6 +378,33 @@ Now with `echo $?` I can print the exit status code. If the exit_function() woul
 Using **ROPGadget** we can actually see the two gadgets we are using to manipulate the _exit_ output. 
 
 <img src='img/ROPGadgets_s2.png' width='1000'>
+
+## Manipulating exit() function status code with A registers
+RISC-V registers, except for **x0** are general purpose. This means that every register can be used for anything. In compiled programs usually is the compiler that takes care of prologues and epilogues of the functions and of the state of the registers. The following PoC uses the register **a1** as the argument for the _exit_ function. Once again the **not_called** function is jumping to the offset (+20) of the call, replacing the value 1 with 0.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+void not_called(){
+        asm ("li a5, 1");
+        asm ("jal ra, exit_function +20");
+        return;
+}
+
+void exit_function(){
+        printf("exit function");
+        exit(0);
+        return;
+}
+
+int main(){
+        register long s2 asm ("s2");
+        asm volatile ("jal ra, not_called");
+        printf("Val of res: %ld\n", s2);
+        return 0;
+}
+```
 
 ### Challenges
 > ROP: a function that calls other functions should not assume these registers hold their value across method calls.
