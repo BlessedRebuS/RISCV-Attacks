@@ -327,7 +327,6 @@ From this example It is clear that to build gadget a non-leaf function should be
 `Another consideration is that without the ra register, hence in a leaf function, neither the initial buffer overflow can be done because no ra register is used and no return address can be overwritten.`
 
 ## Global register manipulation
-
 Using inline ASM we can overwrite the callee saved registers (s2-s11) with arbitrary value. Those registers are by convention not reset and then GCC at compile time doesn't handle the prologue and epilogue of those registers. For this we can pass the value of those register in all the C program. A simple function that sets the **s2** register is the following.
 
 ```c
@@ -340,6 +339,36 @@ void not_called(){
 We can then print this in another part of the program and across two functions (main and not_called). In this case the value of s2 will be 1 because of the load immediate.
 
 <img src='img/s2-reg.png' width='400'>
+
+## Manipulating exit() syscall status code
+Using the previous assumtpions, we can now control the system call arguments using values passed across the functions using callee saved registers.
+In this PoC I will use the **S2** register as the argument passed to the _exit_ system call. The PoC consists in a jump from the cuntion not_called to the exit function but just after the S2 register is set. In this way the S2 register is the register preserved in the not_called function that the attacker can control. 
+The jump lands after in the instruction `asm volatile ("mv a0, s2")` and loads with the value 1 the register S2 that reflects in the value 1 on the exit system call.
+
+```c
+#include <stdio.h>
+
+void not_called(){
+    asm volatile ("li s2, 1");
+    asm volatile ("jal ra, exit_function +22");
+    return;
+}
+
+void exit_function(){
+    printf("exit function\n");
+    asm volatile ("li s2, 0");
+    asm volatile ("li a7, 93");
+    asm volatile ("ecall");
+    return;
+}
+
+int main(){
+    register long s2 asm ("s2");
+    asm volatile ("jal ra, not_called");
+    printf("Val of res: %ld\n", s2);
+    return 0;
+}
+```
 
 ### Challenges
 > ROP: a function that calls other functions should not assume these registers hold their value across method calls.
