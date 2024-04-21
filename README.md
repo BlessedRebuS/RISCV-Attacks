@@ -380,7 +380,7 @@ Using **ROPGadget** we can actually see the two gadgets we are using to manipula
 <img src='img/ROPGadgets_s2.png' width='1000'>
 
 ## Manipulating exit() function status code with A registers
-RISC-V registers, except for **x0** are general purpose. This means that every register can be used for anything. In compiled programs usually is the compiler that takes care of prologues and epilogues of the functions and of the state of the registers. The following PoC uses the register **a1** as the argument for the _exit()_ function. Once again the **not_called** function is jumping to the offset (+20) of the call, replacing the value 1 with 0.
+RISC-V registers, except for **x0** are general purpose. This means that every register can be used for anything. In compiled programs usually is the compiler that takes care of prologues and epilogues of the functions and of the state of the registers. The following PoC uses the register **a1** as the argument for the _exit()_ function. Once again the **not_called** function is jumping to the offset (+22) of the call, replacing the value 1 with 0.
 
 ```c
 #include <stdio.h>
