@@ -408,7 +408,7 @@ int main(){
 
 As before, this result in a exit return value of 1.
 
-<img src='img/manipulate_exit.png' width='700'>
+<img src='img/manipulate_exit_a0.png' width='700'>
 
 ### Challenges
 > ROP: a function that calls other functions should not assume these registers hold their value across method calls.
