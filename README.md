@@ -379,7 +379,7 @@ Using **ROPGadget** we can actually see the two gadgets we are using to manipula
 
 <img src='img/ROPGadgets_s2.png' width='1000'>
 
-## Manipulating exit() function status code with A registers
+## Manipulating exit function status code with A registers
 RISC-V registers, except for **x0** are general purpose. This means that every register can be used for anything. In compiled programs usually is the compiler that takes care of prologues and epilogues of the functions and of the state of the registers. The following PoC uses the register **a1** as the argument for the _exit()_ function. Once again the **not_called** function is jumping to the offset (+22) of the call, replacing the value 1 with 0.
 
 ```c
@@ -409,6 +409,13 @@ int main(){
 As before, this result in a exit return value of 1.
 
 <img src='img/manipulate_exit_a0.png' width='700'>
+
+## Manipulating exit syscall status code with ROP
+Using Return Oriented Programming is it possible hence to manipulate registers. In the previous codes the call was straightforward and done with the normal code execution. This time a particular piece of code will be called (code reuse) and will set a register with a value. This value will be passed to the syscall as argument and the program flow will be interrupted to use. Depending on what piece of code, then what return address is taken, the exit function will have a value or another value.
+
+<img src='img/rop_exit.png' width='700'>
+
+In yellow It is highlighted the difference between a direct jump to `not_called` or a jump that goes first in the `test_empty2` function.
 
 ### Challenges
 > ROP: a function that calls other functions should not assume these registers hold their value across method calls.
