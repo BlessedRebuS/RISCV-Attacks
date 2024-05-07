@@ -1,0 +1,16 @@
+2024/04/13 20:00:55 [emerg] 203279#0: open() "/home/pdifazio/nginx/nginx-1.4.0/install/nginx.conf" failed (2: No such file or directory)
+2024/04/13 20:07:12 [emerg] 203338#0: "server" directive is not allowed here in /home/pdifazio/nginx/nginx-1.4.0/install/nginx.conf:1
+2024/04/13 20:08:19 [emerg] 203363#0: no "events" section in configuration
+2024/04/13 20:08:56 [emerg] 203429#0: open() "/home/pdifazio/nginx/nginx-1.4.0/install/logs/access.log" failed (2: No such file or directory)
+2024/04/13 20:09:40 [emerg] 203432#0: bind() to 0.0.0.0:80 failed (13: Permission denied)
+2024/04/13 21:53:26 [emerg] 203628#0: bind() to 0.0.0.0:80 failed (13: Permission denied)
+2024/04/15 16:16:56 [emerg] 209390#0: bind() to 0.0.0.0:1111 failed (98: Unknown error)
+2024/04/15 16:16:56 [emerg] 209390#0: bind() to 0.0.0.0:1111 failed (98: Unknown error)
+2024/04/15 16:16:56 [emerg] 209390#0: bind() to 0.0.0.0:1111 failed (98: Unknown error)
+2024/04/15 16:16:56 [emerg] 209390#0: bind() to 0.0.0.0:1111 failed (98: Unknown error)
+2024/04/15 16:16:56 [emerg] 209390#0: bind() to 0.0.0.0:1111 failed (98: Unknown error)
+2024/04/15 16:16:56 [emerg] 209390#0: still could not bind()
+2024/05/07 12:57:37 [emerg] 386754#0: bind() to 0.0.0.0:1111 failed (98: Unknown error)
+2024/05/07 12:57:37 [emerg] 386754#0: bind() to 0.0.0.0:1111 failed (98: Unknown error)
+2024/05/07 12:57:37 [emerg] 386754#0: bind() to 0.0.0.0:1111 failed (98: Unknown error)
+2024/05/07 12:57:37 [emerg] 386754#0: bind() to 0.0.0.0:1111 failed (98: Unknown error)
