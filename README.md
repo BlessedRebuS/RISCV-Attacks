@@ -420,10 +420,13 @@ In yellow It is highlighted the difference between a direct jump to `not_called`
 
 ---
 
-## MILK-V Duo S
+## Testing the MILK-V Duo S board
+Milk-V Duo S is an upgraded model of Duo, featuring an upgraded **SG2000** main controller with a larger 512MB memory and expanded IO capabilities. It integrates wireless capabilities with WI-FI 6/BT 5, and comes equipped with a USB 2.0 HOST interface and a 100Mbps Ethernet port for user convenience. Supporting dual cameras (2x MIPI CSI 2-lane) and MIPI video output (MIPI DSI 2-lane), it allows for versatile applications. The device also supports switching between RISC-V and ARM boot through a switch. With enhanced functionality, Duo S is better suited for a variety of scenarios with more complex project development requirements.
 
+```bash
 ip route del default via 192.168.42.2 dev usb0
 ip route add default via 192.168.2.99 dev eth0
+```
 
 ---
 ### Challenges
