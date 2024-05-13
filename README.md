@@ -468,11 +468,49 @@ Now using PuTTY or some serial tool as `minicom` we can read the Duo S serial in
 
 <img src='img/bootloader.png' width='500'>
 
+### Flashing Custom Linux (Ubuntu 22.04)
+The flashed ISO is just a custom Buildroot of Linux, so there is no package manager or other tools, but only stuff like micropython, but we can compile or flash our custom operating system.
+
+To compile ourselves the system we have to _cross-compile_ It using **qemu**, then replace the rootfs of the system with the one created with in the emulated system and then flash it.
+Another faster option is using prebuilt ISO images, like [this one](https://drive.google.com/file/d/1y1NQamzUDzot_kVT2yKkbusoJmtvH5tD/view?usp=sharing) of Ubuntu 22.04. This image is specifically for Milk-V Duo 256M, but it has pretty much the same architecture as the Milk-V Duo S, so It can be compatible. Once downloaded the ISO, we can use BalenaEtcher to flash on the SD card the ISO, then the SD card should be inserted in the Board before boot.
+
+<img src='img/duo_bottom.jpg' width='600'>
+
+We have to wait for a few seconds and then SSH into the board. We can use the RNDIS USB connection if we have the drivers, but I suggest to SSH into the Board plugging an Ethernet cable and doing it local IP. Now the board is up and running with an Ubuntu 22.04 inside.
+
+<img src='img/ubuntu-milkv.png' width='600'>
+
+Once logged in I am configuring it to talk as the default gateway with my firewall and not the USB connection using
+
 ```bash
 ip route del default via 192.168.42.2 dev usb0
 ip route add default via 192.168.2.99 dev eth0
 ```
 
+And i replace the `/etc/apt/sources.list` with the latest repo available for RISC-V Ubuntu 22.04.
+
+```txt
+deb http://ports.ubuntu.com/ubuntu-ports jammy main restricted universe multiverse
+deb-src http://ports.ubuntu.com/ubuntu-ports jammy main restricted universe multiverse
+
+deb http://ports.ubuntu.com/ubuntu-ports jammy-updates main restricted universe multiverse
+deb-src http://ports.ubuntu.com/ubuntu-ports jammy-updates main restricted universe multiverse
+
+deb http://ports.ubuntu.com/ubuntu-ports jammy-backports main restricted universe multiverse
+deb-src http://ports.ubuntu.com/ubuntu-ports jammy-backports main restricted universe multiverse
+
+deb http://ports.ubuntu.com/ubuntu-ports jammy-security main restricted universe multiverse
+deb-src http://ports.ubuntu.com/ubuntu-ports jammy-security main restricted universe multiverse
+
+deb http://archive.canonical.com/ubuntu jammy partner
+deb-src http://archive.canonical.com/ubuntu jammy partner
+```
+
+Then the board can reach the Internet and the package manager can download updates and packages.
+
+<img src='img/duo_update.png' width='600'>
+
+To install custom distros on other boards like the **Milk-V Duo** or **Milk-V Duo 256M** It can be done the same thing but you have to solder the pins to get to the serial console and get the Ethernet connection.
 
 ---
 ### Challenges
