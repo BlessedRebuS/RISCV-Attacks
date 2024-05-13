@@ -423,10 +423,56 @@ In yellow It is highlighted the difference between a direct jump to `not_called`
 ## Testing the MILK-V Duo S board
 Milk-V Duo S is an upgraded model of Duo, featuring an upgraded **SG2000** main controller with a larger 512MB memory and expanded IO capabilities. It integrates wireless capabilities with WI-FI 6/BT 5, and comes equipped with a USB 2.0 HOST interface and a 100Mbps Ethernet port for user convenience. Supporting dual cameras (2x MIPI CSI 2-lane) and MIPI video output (MIPI DSI 2-lane), it allows for versatile applications. The device also supports switching between RISC-V and ARM boot through a switch. With enhanced functionality, Duo S is better suited for a variety of scenarios with more complex project development requirements.
 
+### eMMC version firmware burning
+[As the documentation says](https://milkv.io/docs/duo/getting-started/duos), the Duo S doesn't have a firmware and It has to be burned. We can do via Windows following these steps
+
+. Install driver
+
+. Download the USB driver installation tool: [CviUsbDownloadInstallDriver.zip](https://github.com/milkv-duo/duo-buildroot-sdk/releases/download/Duo-V1.1.0/CviUsbDownloadInstallDriver.zip). After downloading, unzip and install.
+
+. Download burning tool
+
+. Download the command line burning tool under Windows [CviBurn_v2.0_cli_windows.zip](https://github.com/milkv-duo/duo-buildroot-sdk/releases/download/Duo-V1.1.0/CviBurn_v2.0_cli_windows.zip), unzip it after downloading.
+
+. Download firmware
+
+Download the latest version of DuoS eMMC firmware, currently [milkv-duos-emmc-v1.1.0-2024-0410.zip](https://github.com/milkv-duo/duo-buildroot-sdk/releases/download/Duo-V1.1.0/milkv-duos-emmc-v1.1.0-2024-0410.zip).
+
+Once downloaded the cli, inside the CviBurn cli folder we can run
+
+```powershell
+.\usb_dl.exe -s linux -c cv181x -i .\extracted
+```
+
+Where the extracted folder is the extracted firmware.
+
+### Serial connetion using UART
+
+Using some UART to USB tool we can connect via serial communication to the board. I used [this one](https://www.amazon.it/dp/B07TXVRQ7V?psc=1&ref=ppx_yo2ov_dt_b_product_details) from Amazon.
+
+<img src='img/uart_usb.jpg' width='500'>
+
+I wired up as the documentation says, with the following pinout
+
+
+GND (pin 6)	<--->	Black wire
+
+TX (pin 8)	<--->	White wire
+
+RX (pin 10)	<--->	Green wire
+
+
+<img src='img/duo_uart.jpg' width='350'> <img src='img/duo_up.jpg' width='600'>
+
+Now using PuTTY or some serial tool as `minicom` we can read the Duo S serial interface. Here we can see the [OpenSBI](https://github.com/riscv-software-src/opensbi) and the boot process of the device.
+
+<img src='img/bootloader.png' width='500'>
+
 ```bash
 ip route del default via 192.168.42.2 dev usb0
 ip route add default via 192.168.2.99 dev eth0
 ```
+
 
 ---
 ### Challenges
