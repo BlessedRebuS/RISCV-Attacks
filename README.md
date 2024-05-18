@@ -524,6 +524,11 @@ echo 1 > /sys/class/gpio/gpio466/value
 
 A simple C program that export and writes the value on the GPIO interface is [the following](https://raw.githubusercontent.com/BlessedRebuS/RISCV-Attacks/main/bin/led_blink/led_blink.c?token=GHSAT0AAAAAACNVEGJNJ5ZPFGDBGQWLTFJIZSI334Q). 
 
+### Buffer Overflow on the MILK-V
+On the RISC-V board, after turning off ASLR [the BOF](https://raw.githubusercontent.com/BlessedRebuS/RISCV-ROP-Testbed/main/buffer_overflow/risc_bof.c) is the same as a normal RISC-V architecture. Strangely _it uses the same addressess_ also if the program is compiled on different microarchitecture, like the SiFive chips.
+
+<img src='/img/milkv-bof.png' width='600'>
+
 ---
 ### Challenges
 > ROP: a function that calls other functions should not assume these registers hold their value across method calls.
