@@ -505,6 +505,25 @@ Then the board can reach the Internet and the package manager can download updat
 
 To install custom distros on other boards like the **Milk-V Duo** or **Milk-V Duo 256M** It can be done the same thing but you have to solder the pins to get to the serial console and get the Ethernet connection.
 
+### Led Blink using GPIO
+Using General Purpose I/O pins we can generate signals to power on simple things like leds. For the pin N 466 looking at the pinout of the Milk-V we can turn It on providing 3.3V with the following.
+
+```bash
+export 466 > /sys/class/gpio/export
+echo out > /sys/class/gpio/gpio466/direction
+echo 1 > /sys/class/gpio/gpio466/value
+```
+
+<img src='img/blink.jpg' width='600'>
+
+And to turn It off
+
+```bash
+echo 1 > /sys/class/gpio/gpio466/value
+```
+
+A simple C program that export and writes the value on the GPIO interface is [the following](https://raw.githubusercontent.com/BlessedRebuS/RISCV-Attacks/main/bin/led_blink/led_blink.c?token=GHSAT0AAAAAACNVEGJNJ5ZPFGDBGQWLTFJIZSI334Q). 
+
 ---
 ### Challenges
 > ROP: a function that calls other functions should not assume these registers hold their value across method calls.
