@@ -533,7 +533,7 @@ On the RISC-V board, after turning off ASLR [the BOF](https://raw.githubusercont
 Using a little variation of the BOF, we can control the led output of a the board, modifying also the timing behiaviour of the program. Exploiting a buffer overlow in a specific place of the code will overwrite the **RA** and cause a loop on the blink function. As the result we get a permanent blinking **red LED** instead of a single blink of a **green LED**. [Here the is a video for the PoC](https://github.com/BlessedRebuS/RISCV-Attacks/raw/main/img/blink-bof-demo.mov). 
 I can think this attack in a scenario of a working mechanical and electric element that has to output his state thourgh LEDs and is now manipulate 
 
-<a href="https://github.com/BlessedRebuS/RISCV-Attacks/raw/main/img/blink-bof-demo.mov"<img src='img/blink-bof-screen.jpg' width='1200'></a>
+<a href="https://github.com/BlessedRebuS/RISCV-Attacks/raw/main/img/blink-bof-demo.mov"><img src='img/blink-bof-screen.jpg' width='1200'></a>
 
 ---
 ### Challenges
