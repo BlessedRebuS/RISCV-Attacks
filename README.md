@@ -445,13 +445,16 @@ int main(int argc, char** argv) {
 }
 ```
 
-Here, after the 56th character (then after buffer is filled) the a6 register is overwritten with the arbitrary **HEX** value put in the exploit. If the **not_called** function is executed normally It would result in a exit code 0. The following code will give an exit value of 1
+Here, after the 56th character the a6 register is overwritten with the arbitrary **HEX** value put in the exploit. If the **not_called** function was executed normally It would result in a exit code 0.
+The following code will give an exit value of 1.
 
 ```bash
 ./rop.out "$(python3 -c 'print("A"*56 + "\x01" + "B"*15 + "\x5a\x05\x01\x00")')"
+$?
+> 1
 ```
 
-Give that, replacin this character will give us an arbitrary value of the exit function and this means that **we can control the exit system call return value**.
+Give that, replacing this character will give us an arbitrary value of the exit function and this means that **we can control the exit system call return value**.
 
 <img src='img/exit_manipulation_stack.png' width='700'>
 
