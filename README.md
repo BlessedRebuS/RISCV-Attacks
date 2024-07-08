@@ -583,10 +583,5 @@ I can think this attack in a scenario of a working mechanical and electric eleme
 <a href="https://github.com/BlessedRebuS/RISCV-Attacks/raw/main/img/blink-bof-demo.mov"><img src='img/blink-bof-screen.jpg' width='1200'></a>
 
 ---
-### Challenges
-> ROP: a function that calls other functions should not assume these registers hold their value across method calls.
-
-> ret2libc: https://github.com/chrysh/riscv_exploitation
-
 ### Resources
 [Black Hat conference ](https://www.youtube.com/watch?v=HCZ6DCu2ciE) and [RISC-V Attacks POC](https://github.com/cispa/Security-RISC/)
