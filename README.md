@@ -1,3 +1,9 @@
+# Analysis of RISC-V Security
+
+<p align="center">
+<img src='img/riscv.jpg' width='400'>
+</p>
+
 # Side channel attacks
 In computer security, a side-channel attack is any attack based on extra information that can be gathered because of the fundamental way a computer protocol or algorithm is implemented, rather than flaws in the design of the protocol or algorithm itself. In this study case, the attacks will work only if the microarchitecture offers **[out of order execution](https://www.cs.uaf.edu/2011/spring/cs641/proj1/vsanditi/)** and **[speculative execution](https://en.wikipedia.org/wiki/Speculative_execution)**.
 
